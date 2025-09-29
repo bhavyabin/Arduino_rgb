@@ -4,7 +4,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return render_template("index.html")
+    with open("color.txt", "r") as file:
+        x = file.read()
+    return render_template("index.html",x = x)
 
 @app.route("/api", methods=["POST"])
 def api():
