@@ -1,21 +1,18 @@
-FROM python:3.12-slim
+    # Use a slim Python base image
+    FROM python:3.9-slim-buster
 
-COPY requirements.txt /
+    # Set the working directory inside the container
+    WORKDIR /app
 
-RUN pip3 install --upgrade pip
+    # Copy the requirements file and install dependencies
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip3 install -r /requirements.txt
+    # Copy the entire application code
+    COPY . .
 
+    # Expose the port your Flask app listens on
+    EXPOSE 5000
 
-
-COPY . /app
-
-WORKDIR /app
-
-
-
-EXPOSE 8080
-
-
-
-CMD ["gunicorn","--config", "gunicorn_config.py", "app:app"]
+    # Command to run the Flask application
+    CMD ["python", "app.py"]
