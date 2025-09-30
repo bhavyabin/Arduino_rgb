@@ -1,4 +1,4 @@
-cd Arduino_rgb
+
 
 git pull
 
